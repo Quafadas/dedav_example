@@ -1,2 +1,9 @@
 *.class
 *.log
+.bsp
+.bloop
+.metals
+project/project
+target
+metals.sbt
+settings.json
