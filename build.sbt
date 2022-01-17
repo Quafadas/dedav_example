@@ -1,6 +1,5 @@
 Global / semanticdbEnabled := true
 Global / onChangedBuildSource := ReloadOnSourceChanges
-import java.io.File
 
 
 resolvers += "4 jvm repr" at "https://maven.scijava.org/content/repositories/public/"
