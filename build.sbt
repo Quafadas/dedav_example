@@ -14,6 +14,6 @@ lazy val root = project
         "-Ytasty-reader" // to use scala 3 lib
     ),
     libraryDependencies ++= Seq(
-      ("io.github.quafadas" %% "dedav4s" % "0.1.1").cross(CrossVersion.for2_13Use3),
+      ("io.github.quafadas" %% "dedav4s" % "0.1.2").cross(CrossVersion.for2_13Use3),
     )
   )
