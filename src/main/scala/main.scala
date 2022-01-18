@@ -53,38 +53,41 @@ object main {
 
 object simpler {
   def main(args: Array[String]): Unit = {
-    val data: Seq[(String, Seq[(Double, Double)])] =
+    val data: Seq[(String, String, Seq[(Double, Double)])] =
       Seq(
-        ("series 1", Seq((5, 6), (16, 46))),
-        ("series 2", Seq((3, 1), (15, 9)))
+        ("series 1", "black", Seq((5, 6), (16, 46))),
+        ("series 2", "red", Seq((3, 1), (15, 9)))
       )
 
-    val data1: Seq[(String, Seq[(Double, Double)])] = (
+    val data1: Seq[(String, String, Seq[(Double, Double)])] = (
       Seq(
-        ("series 1", Seq((1, 2), (3, 4))),
-        ("series 2", Seq((3, 6), (8, 9)))
+        ("series 1", "steelblue", Seq((1, 2), (3, 4))),
+        ("series 2", "green", Seq((3, 6), (8, 9)))
       )
     )
+    def seriesScatterPlot(title: String, data: Seq[(String, String, Seq[(Double, Double)])]) = {
 
-    def seriesScatterPlot(title: String, data: Seq[(String, Seq[(Double, Double)])]) = {
 
       val polishData = data.map {
-        case (colour, aSeq) => {
+        case (seriesName, colour, aSeq) => {
 
           aSeq.map { point =>
             ujson.Obj(
-              "series" -> colour,
+              "series" -> seriesName,
+              "colour" -> colour,
               "x" -> point._1,
               "y" -> point._2
             )
           }
         }
-      }.flatten
+      }.flatten      
 
       SeriesScatter(
         List(
           (spec: ujson.Value) => spec("title") = title, // set title
-          (spec: Value) => spec("data") = ujson.Arr(ujson.Obj("name" -> "source", "values" -> polishData))
+          (spec: Value) => spec("data") = ujson.Arr(ujson.Obj("name" -> "source", "values" -> polishData)),
+          (spec: Value) => spec("scales")(1)("zero") = false,
+          (spec: Value) => spec("scales")(2)("range") = ujson.Obj("data" -> "source", "field"->"colour")
         )
       )
     }
