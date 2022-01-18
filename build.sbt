@@ -9,11 +9,11 @@ lazy val root = project
   .settings(
     name := "example",
     description := "dedav example",    
-    scalaVersion := "2.13.6",
+    scalaVersion := "3.0.2",
     scalacOptions ++= Seq(
         "-Ytasty-reader" // to use scala 3 lib
     ),
     libraryDependencies ++= Seq(
-      ("io.github.quafadas" %% "dedav4s" % "0.1.2").cross(CrossVersion.for2_13Use3),
+      "io.github.quafadas" %% "dedav4s" % "0.1.2",
     )
   )
